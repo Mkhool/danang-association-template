@@ -12,23 +12,19 @@
 const UI_LABELS = {
   en: {
     skipLink: "Skip to content",
-    navAbout: "About",
+    navAbout: "About & Contact",
     navHelp: "How to help",
     navNeeds: "Needs",
-    navContact: "Visit & Contact",
-    navPhotos: "Photos",
     navNotes: "Notes",
     navMenu: "Menu",
     backToTop: "Back to top",
+    aboutContactTitle: "About & Contact",
     aboutTitle: "About",
     whoWeHelpTitle: "Who we help",
     helpTitle: "How to help",
     contactTitle: "Visit & contact",
-    photosTitle: "Photos",
-    footerDisclaimer:
-      "Created by a volunteer to help visitors find accurate information.",
+    footerNote: "Volunteer-made information page.",
     btnMaps: "Open in Google Maps",
-    btnContact: "Contact",
     btnHelp: "How to help",
     btnFacebook: "Facebook",
     lblAddress: "Address",
@@ -37,14 +33,10 @@ const UI_LABELS = {
     lblWhatsapp: "WhatsApp",
     lblEmail: "Email",
     lblFacebook: "Facebook",
-    mapsLabel: "Google Maps",
-    statusLabel: "Status",
     findUsOn: "Find us on",
     glanceLocation: "Location",
     glanceHelp: "Help with",
     glanceVisit: "Visits",
-    glanceContact: "Best contact",
-    glanceContactFallback: "Phone or WhatsApp",
     carouselPrev: "Previous photo",
     carouselNext: "Next photo",
     slideLabel: "Photo {n} of {total}",
@@ -52,23 +44,19 @@ const UI_LABELS = {
   },
   vi: {
     skipLink: "Bỏ qua đến nội dung",
-    navAbout: "Giới thiệu",
+    navAbout: "Giới thiệu & Liên hệ",
     navHelp: "Cách hỗ trợ",
     navNeeds: "Nhu cầu hiện tại",
-    navContact: "Liên hệ",
-    navPhotos: "Hình ảnh",
     navNotes: "Lưu ý",
     navMenu: "Menu",
     backToTop: "Lên đầu trang",
+    aboutContactTitle: "Giới thiệu & Liên hệ",
     aboutTitle: "Giới thiệu",
     whoWeHelpTitle: "Chúng tôi giúp ai",
     helpTitle: "Cách giúp đỡ",
     contactTitle: "Thăm & liên hệ",
-    photosTitle: "Hình ảnh",
-    footerDisclaimer:
-      "Được tạo bởi một tình nguyện viên nhằm giúp khách truy cập tìm thông tin chính xác.",
+    footerNote: "Trang thông tin do tình nguyện viên thực hiện.",
     btnMaps: "Mở trong Google Maps",
-    btnContact: "Liên hệ",
     btnHelp: "Cách giúp đỡ",
     btnFacebook: "Facebook",
     lblAddress: "Địa chỉ",
@@ -77,14 +65,10 @@ const UI_LABELS = {
     lblWhatsapp: "WhatsApp",
     lblEmail: "Email",
     lblFacebook: "Facebook",
-    mapsLabel: "Google Maps",
-    statusLabel: "Trạng thái",
     findUsOn: "Tìm chúng tôi trên",
     glanceLocation: "Vị trí",
     glanceHelp: "Hỗ trợ về",
     glanceVisit: "Thăm",
-    glanceContact: "Liên hệ tốt nhất",
-    glanceContactFallback: "Điện thoại hoặc WhatsApp",
     carouselPrev: "Ảnh trước",
     carouselNext: "Ảnh tiếp theo",
     slideLabel: "Ảnh {n} / {total}",
@@ -154,15 +138,12 @@ function render(lang) {
   setText("hero-subtitle", t.subtitle);
   setText("hero-name", t.name);
   setText("hero-short", t.shortDescription);
-  const heroImg = $("#hero-image");
-  const heroPhoto = c.photos && c.photos[0];
-  if (heroPhoto) { heroImg.src = heroPhoto.src; heroImg.alt = altFor(heroPhoto, lang); }
 
   const actions = $("#hero-actions");
   actions.replaceChildren();
-  if (c.googleMapsUrl)
-    actions.appendChild(el("a", { class: "btn btn--primary", href: c.googleMapsUrl, target: "_blank", rel: "noopener", text: ui.btnMaps }));
+  // One discreet CTA. Google Maps + full contacts live only in About & Contact.
   actions.appendChild(el("a", { class: "btn btn--ghost", href: "#how-to-help", text: ui.btnHelp }));
+  actions.appendChild(el("a", { class: "hero-link", href: "#about-contact", text: `${ui.navAbout} →` }));
   // Facebook stays a discreet text link, not a primary call-to-action.
   if (c.facebookUrl)
     actions.appendChild(
@@ -174,8 +155,7 @@ function render(lang) {
   const glance = [
     { label: ui.glanceLocation, value: c.address },
     { label: ui.glanceHelp, value: t.helpShort },
-    { label: ui.glanceVisit, value: t.visitShort },
-    { label: ui.glanceContact, value: c.phone || c.whatsapp || ui.glanceContactFallback }
+    { label: ui.glanceVisit, value: t.visitShort }
   ].filter((g) => g.value);
   $("#glance-grid").replaceChildren(
     list(glance, (g) =>
@@ -218,11 +198,13 @@ function render(lang) {
   if (c.facebookUrl) addRow(ui.lblFacebook, el("a", { href: c.facebookUrl, target: "_blank", rel: "noopener", text: c.facebookUrl }));
   if (t.languages && t.languages.length) addRow(t.languagesLabel, document.createTextNode(t.languages.join(", ")));
 
-  // Single, most-useful action. Phone / WhatsApp / email / Facebook live as
-  // clickable rows in the info list above — no redundant button bar.
-  const cbtn = $("#contact-buttons");
-  cbtn.replaceChildren();
-  if (c.googleMapsUrl) cbtn.appendChild(el("a", { class: "btn btn--primary", href: c.googleMapsUrl, target: "_blank", rel: "noopener", text: ui.btnMaps }));
+  // Single, most-useful action inside the contact card.
+  const cActions = $("#contact-actions");
+  if (cActions) {
+    cActions.replaceChildren();
+    if (c.googleMapsUrl)
+      cActions.appendChild(el("a", { class: "btn btn--primary", href: c.googleMapsUrl, target: "_blank", rel: "noopener", text: ui.btnMaps }));
+  }
 
   /* ---- Photos (carousel) ---- */
   buildCarousel(c.photos || [], lang, ui);
@@ -232,16 +214,9 @@ function render(lang) {
   $("#notes-list").replaceChildren(list(t.importantNotes, (n) => el("li", { text: n })));
   setText("emergency-note", t.emergencyNote);
 
-  /* ---- Footer ---- */
-  setText("footer-status", `${ui.statusLabel}: ${t.verifiedStatus}`);
-  const fcontact = $("#footer-contact");
-  fcontact.replaceChildren();
-  const addContact = (linkNode) => fcontact.appendChild(el("li", {}, [linkNode]));
-  if (c.phone) addContact(el("a", { href: "tel:" + c.phone.replace(/\s+/g, ""), text: ui.lblPhone }));
-  if (c.whatsapp) addContact(el("a", { href: "https://wa.me/" + c.whatsapp.replace(/[^\d]/g, ""), target: "_blank", rel: "noopener", text: ui.lblWhatsapp }));
-  if (c.email) addContact(el("a", { href: "mailto:" + c.email, text: ui.lblEmail }));
-  if (c.googleMapsUrl) addContact(el("a", { href: c.googleMapsUrl, target: "_blank", rel: "noopener", text: ui.mapsLabel }));
-  if (c.facebookUrl) addContact(el("a", { href: c.facebookUrl, target: "_blank", rel: "noopener", text: ui.lblFacebook }));
+  /* ---- Footer (minimal identity line: name · year · note) ---- */
+  const year = (c.lastUpdated && c.lastUpdated.slice(0, 4)) || String(new Date().getFullYear());
+  setText("footer-line", `${t.name} · ${year} · ${ui.footerNote}`);
 
   /* ---- Language buttons state ---- */
   document.querySelectorAll(".lang-btn").forEach((b) =>
@@ -260,7 +235,6 @@ function buildCarousel(photos, lang, ui) {
   const track = $("#carousel-track");
   const caption = $("#carousel-caption");
   const dots = $("#carousel-dots");
-  const thumbs = $("#carousel-thumbs");
   const prevBtn = $("#carousel-prev");
   const nextBtn = $("#carousel-next");
   if (!root || !track) return;
@@ -294,27 +268,14 @@ function buildCarousel(photos, lang, ui) {
     )
   );
 
-  // Thumbnails (decorative alt: navigation is labelled on the button)
-  thumbs.replaceChildren(
-    list(photos, (p, i) =>
-      el("li", {}, [
-        el("button", { type: "button", class: "carousel__thumb",
-          "aria-label": label(ui.goToPhoto, i) },
-          [el("img", { src: p.src, alt: "", draggable: "false", loading: "lazy" })])
-      ])
-    )
-  );
-
   // Static button labels + show/hide controls for the single-photo case.
   prevBtn.setAttribute("aria-label", ui.carouselPrev || "Previous photo");
   nextBtn.setAttribute("aria-label", ui.carouselNext || "Next photo");
   prevBtn.hidden = single;
   nextBtn.hidden = single;
   dots.hidden = single;
-  thumbs.hidden = single;
 
   const dotEls = Array.from(dots.children);
-  const thumbBtns = Array.from(thumbs.querySelectorAll(".carousel__thumb"));
 
   let index = 0;
   function go(i) {
@@ -327,17 +288,11 @@ function buildCarousel(photos, lang, ui) {
       d.setAttribute("aria-selected", String(active));
       d.tabIndex = active ? 0 : -1;
     });
-    thumbBtns.forEach((tb, k) => {
-      const active = k === index;
-      tb.classList.toggle("is-active", active);
-      tb.setAttribute("aria-current", active ? "true" : "false");
-    });
   }
 
   prevBtn.onclick = () => go(index - 1);
   nextBtn.onclick = () => go(index + 1);
   dotEls.forEach((d, k) => (d.onclick = () => go(k)));
-  thumbBtns.forEach((tb, k) => (tb.onclick = () => go(k)));
 
   // Keyboard arrows when focus is inside the carousel.
   root.onkeydown = (e) => {

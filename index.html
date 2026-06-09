@@ -30,7 +30,7 @@
 
 <body>
   <!-- Skip link for keyboard / screen-reader users -->
-  <a href="#about" class="skip-link" data-ui="skipLink">Skip to content</a>
+  <a href="#about-contact" class="skip-link" data-ui="skipLink">Skip to content</a>
 
   <!-- ============================= NAVBAR ============================= -->
   <header class="site-header">
@@ -47,11 +47,9 @@
            (links + language switch). On desktop it shows inline. -->
       <nav class="nav__menu" id="nav-menu" aria-label="Main navigation">
         <ul class="nav__list">
-          <li><a href="#about" class="nav__link" data-nav="about" data-ui="navAbout">About</a></li>
+          <li><a href="#about-contact" class="nav__link" data-nav="about-contact" data-ui="navAbout">About &amp; Contact</a></li>
           <li><a href="#how-to-help" class="nav__link" data-nav="how-to-help" data-ui="navHelp">How to help</a></li>
           <li><a href="#needs" class="nav__link" data-nav="needs" data-ui="navNeeds">Needs</a></li>
-          <li><a href="#contact" class="nav__link" data-nav="contact" data-ui="navContact">Visit &amp; Contact</a></li>
-          <li><a href="#photos" class="nav__link" data-nav="photos" data-ui="navPhotos">Photos</a></li>
           <li><a href="#notes" class="nav__link" data-nav="notes" data-ui="navNotes">Notes</a></li>
         </ul>
 
@@ -73,9 +71,23 @@
           <p class="hero-desc" id="hero-short"></p>
           <div class="hero-actions" id="hero-actions"></div>
         </div>
-        <figure class="hero-media">
-          <img id="hero-image" src="images/hero.svg" alt="" width="800" height="600" loading="eager" />
-        </figure>
+        <div class="hero-media">
+          <!-- Photo carousel lives in the hero — the page has a single photo zone. -->
+          <div class="carousel" id="carousel" role="group" aria-roledescription="carousel" aria-label="Photos">
+            <div class="carousel__viewport" id="carousel-viewport">
+              <div class="carousel__track" id="carousel-track"><!-- slides injected by script.js --></div>
+              <!-- Arrows overlay the photo, so they never widen the layout -->
+              <button type="button" class="carousel__btn carousel__btn--prev" id="carousel-prev">
+                <span aria-hidden="true">‹</span>
+              </button>
+              <button type="button" class="carousel__btn carousel__btn--next" id="carousel-next">
+                <span aria-hidden="true">›</span>
+              </button>
+            </div>
+            <p class="carousel__caption" id="carousel-caption" aria-live="polite"></p>
+            <div class="carousel__dots" id="carousel-dots" role="tablist" aria-label="Choose photo"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -86,13 +98,27 @@
       </div>
     </section>
 
-    <!-- ============================= ABOUT ============================= -->
-    <section id="about" class="section" aria-labelledby="about-title">
+    <!-- ======================= ABOUT & CONTACT ========================= -->
+    <!-- Merged section placed high on the page: contact info first (most
+         useful for a visitor), the "about" text second. -->
+    <section id="about-contact" class="section" aria-labelledby="about-contact-title">
       <div class="container">
-        <h2 id="about-title" data-ui="aboutTitle">About</h2>
-        <p class="lead" id="about-long"></p>
-        <h3 data-ui="whoWeHelpTitle">Who we help</h3>
-        <p id="about-who"></p>
+        <h2 id="about-contact-title" data-ui="aboutContactTitle">About &amp; Contact</h2>
+        <div class="ac-grid">
+          <!-- Left / first on mobile: visit & contact -->
+          <div class="ac-contact">
+            <h3 data-ui="contactTitle">Visit &amp; contact</h3>
+            <dl class="contact-info" id="contact-info"></dl>
+            <div class="ac-contact__actions" id="contact-actions"></div>
+          </div>
+          <!-- Right / second on mobile: about -->
+          <div class="ac-about">
+            <h3 data-ui="aboutTitle">About</h3>
+            <p class="lead" id="about-long"></p>
+            <h4 data-ui="whoWeHelpTitle">Who we help</h4>
+            <p id="about-who"></p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -125,44 +151,6 @@
       </div>
     </section>
 
-    <!-- ========================= VISIT & CONTACT ======================= -->
-    <section id="contact" class="section section--alt" aria-labelledby="contact-title">
-      <div class="container">
-        <h2 id="contact-title" data-ui="contactTitle">Visit &amp; contact</h2>
-        <div class="contact-grid">
-          <dl class="contact-info" id="contact-info"></dl>
-          <div class="contact-actions">
-            <div class="contact-buttons" id="contact-buttons"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== PHOTOS =========================== -->
-    <section id="photos" class="section" aria-labelledby="photos-title">
-      <div class="container">
-        <h2 id="photos-title" data-ui="photosTitle">Photos</h2>
-
-        <div class="carousel" id="carousel" role="group" aria-roledescription="carousel" aria-label="Photos">
-          <div class="carousel__viewport" id="carousel-viewport">
-            <div class="carousel__track" id="carousel-track"><!-- slides injected by script.js --></div>
-            <!-- Arrows overlay the photo, so they never widen the layout -->
-            <button type="button" class="carousel__btn carousel__btn--prev" id="carousel-prev">
-              <span aria-hidden="true">‹</span>
-            </button>
-            <button type="button" class="carousel__btn carousel__btn--next" id="carousel-next">
-              <span aria-hidden="true">›</span>
-            </button>
-          </div>
-
-          <p class="carousel__caption" id="carousel-caption" aria-live="polite"></p>
-          <div class="carousel__dots" id="carousel-dots" role="tablist" aria-label="Choose photo"></div>
-          <ul class="carousel__thumbs" id="carousel-thumbs"></ul>
-        </div>
-
-      </div>
-    </section>
-
     <!-- ========================= IMPORTANT NOTES ======================= -->
     <section id="notes" class="section section--notes" aria-labelledby="notes-title">
       <div class="container">
@@ -176,9 +164,7 @@
   <!-- ============================== FOOTER =========================== -->
   <footer class="site-footer">
     <div class="container">
-      <p class="status" id="footer-status"></p>
-      <p class="disclaimer" data-ui="footerDisclaimer"></p>
-      <ul class="footer-contact" id="footer-contact" aria-label="Contact"></ul>
+      <p class="footer-line" id="footer-line"></p>
     </div>
   </footer>
 

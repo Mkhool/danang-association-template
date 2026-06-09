@@ -27,7 +27,7 @@ const SITE = {
 
     // Public website URL (used for SEO / Open Graph / JSON-LD).
     // Update this once you know your final domain.
-    siteUrl: "https://example.org/",
+    siteUrl: "https://danang-association-template.pages.dev",
 
     // Contact details. Leave a value as "" (empty string) to hide its button.
     address: "Da Nang, Vietnam",
@@ -143,10 +143,7 @@ const SITE = {
         "Only bring medicines if the organization specifically asks."
       ],
       emergencyNote:
-        "This page is for information only. In an emergency, contact Vietnam's local emergency services.",
-
-      // Status / verification
-      verifiedStatus: "Information to be confirmed"
+        "This page is for information only. In an emergency, contact Vietnam's local emergency services."
     },
 
     vi: {
@@ -203,9 +200,7 @@ const SITE = {
         "Chỉ mang thuốc nếu tổ chức yêu cầu cụ thể."
       ],
       emergencyNote:
-        "Trang này chỉ mang tính thông tin. Trong trường hợp khẩn cấp, hãy liên hệ dịch vụ cứu hộ tại Việt Nam.",
-
-      verifiedStatus: "Thông tin cần được xác nhận"
+        "Trang này chỉ mang tính thông tin. Trong trường hợp khẩn cấp, hãy liên hệ dịch vụ cứu hộ tại Việt Nam."
     }
   }
 };

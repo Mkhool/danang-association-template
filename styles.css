@@ -215,12 +215,9 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
   text-transform: uppercase; font-size: .74rem; margin: 0 0 .35rem;
 }
 .hero-desc { color: var(--color-muted); max-width: 52ch; font-size: 1.08rem; }
-.hero-media { margin: 0; }
-.hero-media img {
-  width: 100%; border-radius: var(--radius); box-shadow: var(--shadow);
-  object-fit: cover; aspect-ratio: 5 / 4;
-  border: 1px solid rgba(255, 255, 255, .6);
-}
+.hero-media { margin: 0; min-width: 0; }
+/* The photo carousel lives in the hero — fill the column, stay compact */
+.hero-media .carousel { margin: 0; max-width: 100%; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; margin-top: 1.3rem; }
 .hero-link {
   font-weight: 600; font-size: .92rem; color: var(--color-primary-dark);
@@ -305,20 +302,31 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
   content: "✓"; position: absolute; left: 0; color: var(--tint-accept-mark); font-weight: 700;
 }
 
-/* Contact — an information card, not a button bar */
-.contact-grid { display: grid; gap: 1.4rem; }
-.contact-info {
-  margin: 0; display: grid; gap: .85rem;
+/* About & Contact — merged section: contact card (left) + about (right).
+   Contact comes first in the DOM, so it sits left on desktop and on top on
+   mobile — the most useful info is always reached first. */
+.ac-grid { display: grid; gap: 1.2rem; }
+.ac-contact, .ac-about {
   background: var(--color-surface); border: 1px solid var(--color-border);
   border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow-soft);
 }
-.contact-info > div { display: grid; gap: .15rem; padding-bottom: .75rem; border-bottom: 1px solid var(--color-border); }
-.contact-info > div:last-child { padding-bottom: 0; border-bottom: 0; }
-.contact-info dt { font-weight: 700; color: var(--color-sage); font-size: .7rem;
-  text-transform: uppercase; letter-spacing: .1em; }
-.contact-info dd { margin: 0; }
+.ac-contact h3, .ac-about h3 { color: var(--color-primary-dark); margin-bottom: .9rem; }
+.ac-about h4 {
+  font-family: var(--font-display); color: var(--color-primary);
+  font-size: 1.05rem; font-weight: 600; margin: 1rem 0 .3rem;
+}
+.ac-about .lead { font-size: 1.02rem; margin-bottom: 0; }
+.ac-about p:last-child { margin-bottom: 0; }
+.ac-contact__actions { margin-top: 1.1rem; }
+.ac-contact__actions .btn { font-size: .9rem; padding: .6rem 1.1rem; }
+
+/* Compact contact list — small label + value rows, no heavy dividers */
+.contact-info { margin: 0; display: grid; gap: .6rem; }
+.contact-info > div { display: grid; gap: .1rem; }
+.contact-info dt { font-weight: 700; color: var(--color-sage); font-size: .68rem;
+  text-transform: uppercase; letter-spacing: .08em; }
+.contact-info dd { margin: 0; font-size: .97rem; }
 .contact-info a { word-break: break-word; }
-.contact-buttons { display: flex; flex-wrap: wrap; gap: .7rem; }
 
 /* Carousel — one soft, compact photo at a time */
 .carousel { margin-top: 1.1rem; max-width: 760px; width: 100%; }
@@ -366,26 +374,8 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
 .carousel__dot:hover { background: var(--color-sage); }
 .carousel__dot.is-active { background: var(--color-primary); transform: scale(1.25); }
 
-/* Thumbnails (desktop only) */
-.carousel__thumbs {
-  display: none; list-style: none; margin: .9rem 0 0; padding: 0;
-  gap: .5rem; flex-wrap: wrap; justify-content: center;
-}
-.carousel__thumbs[hidden] { display: none; }
-.carousel__thumb {
-  padding: 0; border: 2px solid transparent; border-radius: 10px; cursor: pointer;
-  background: none; overflow: hidden; line-height: 0; opacity: .65;
-  transition: opacity .15s ease, border-color .15s ease;
-}
-.carousel__thumb img { width: 64px; height: 48px; object-fit: cover; display: block; }
-.carousel__thumb:hover { opacity: 1; }
-.carousel__thumb.is-active { opacity: 1; border-color: var(--color-primary); }
-
 @media (prefers-reduced-motion: reduce) {
   .carousel__track { transition: none; }
-}
-@media (min-width: 720px) {
-  .carousel__thumbs { display: flex; }
 }
 
 /* A few gentle notes — calm card, no red alert */
@@ -406,34 +396,18 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
 }
 
 /* ============================== FOOTER ================================ */
-/* Light, calm footer — not a heavy dark block */
+/* Minimal footer — a single discreet identity line, not a heavy block */
 .site-footer {
   background: var(--color-surface-alt);
   border-top: 1px solid var(--color-border);
-  padding: 2rem 0; margin-top: var(--space);
+  padding: 1.3rem 0; margin-top: var(--space);
   color: var(--color-muted);
 }
-.site-footer p { margin: 0 0 .55rem; max-width: 72ch; }
-.site-footer .status { font-weight: 700; color: var(--color-primary-dark); }
-.site-footer .disclaimer { font-size: .9rem; margin-bottom: .9rem; }
-
-/* Footer contact links — compact, useful, clickable */
-.footer-contact {
-  list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: .5rem .9rem;
-}
-.footer-contact a {
-  color: var(--color-primary-dark); text-decoration: none; font-weight: 600;
-  font-size: .9rem; display: inline-flex; align-items: center; gap: .3rem;
-}
-.footer-contact a:hover { text-decoration: underline; }
-.footer-contact li:not(:last-child) a::after {
-  content: "·"; margin-left: .9rem; color: var(--color-muted); font-weight: 400;
-}
+.footer-line { margin: 0; font-size: .9rem; text-align: center; }
 
 /* ===================== ANCHORS / BACK-TO-TOP ========================== */
 /* Keep section titles clear of the sticky navbar when jumping to anchors. */
-#about, #how-to-help, #needs, #contact, #photos, #notes { scroll-margin-top: 76px; }
+#about-contact, #how-to-help, #needs, #notes { scroll-margin-top: 76px; }
 
 .back-to-top {
   position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 60;
@@ -453,16 +427,19 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
 
 /* ============================ RESPONSIVE ============================== */
 @media (min-width: 640px) {
-  .glance-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Three quick-fact cards, evenly spread */
+  .glance-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 720px) {
   .steps { grid-template-columns: repeat(3, 1fr); }
   .needs-grid { grid-template-columns: 1fr 1fr; }
-  .contact-grid { grid-template-columns: 1.1fr .9fr; align-items: start; }
+}
+@media (min-width: 820px) {
+  /* Two balanced columns: contact (left), about (right) */
+  .ac-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 1.8rem; align-items: start; }
 }
 @media (min-width: 940px) {
   .hero-inner { grid-template-columns: 1.05fr .95fr; gap: 2.6rem; }
-  .glance-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ---- Mobile density: a bit more compact, same readability ---- */
@@ -471,7 +448,7 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
   .hero { padding: 1.5rem 0 1.8rem; }
   .hero-desc, .lead { font-size: 1.02rem; }
   p { margin-bottom: .8rem; }
-  .card, .contact-info { padding: 1.05rem; }
+  .card, .ac-contact, .ac-about { padding: 1.05rem; }
   .notes-list { padding: 1.05rem 1.15rem; }
   .glance { padding: 1.1rem 0; }
   .glance-card { padding: .8rem .95rem; }
