@@ -143,7 +143,6 @@ function render(lang) {
   actions.replaceChildren();
   // One discreet CTA. Google Maps + full contacts live only in About & Contact.
   actions.appendChild(el("a", { class: "btn btn--ghost", href: "#how-to-help", text: ui.btnHelp }));
-  actions.appendChild(el("a", { class: "hero-link", href: "#about-contact", text: `${ui.navAbout} →` }));
   // Facebook stays a discreet text link, not a primary call-to-action.
   if (c.facebookUrl)
     actions.appendChild(
@@ -179,7 +178,6 @@ function render(lang) {
   /* ---- Current needs ---- */
   setText("needs-title", t.currentNeedsTitle);
   $("#needs-list").replaceChildren(list(t.currentNeeds, (n) => el("li", { text: n })));
-  setText("needs-note", t.needsNote);
 
   setText("accepted-title", t.acceptedTitle);
   $("#accepted-list").replaceChildren(list(t.acceptedDonations, (n) => el("li", { text: n })));
@@ -212,7 +210,6 @@ function render(lang) {
   /* ---- Important notes ---- */
   setText("notes-title", t.importantNotesTitle);
   $("#notes-list").replaceChildren(list(t.importantNotes, (n) => el("li", { text: n })));
-  setText("emergency-note", t.emergencyNote);
 
   /* ---- Footer (minimal identity line: name · year · note) ---- */
   const year = (c.lastUpdated && c.lastUpdated.slice(0, 4)) || String(new Date().getFullYear());

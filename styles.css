@@ -27,8 +27,6 @@
   --tint-accept-mark: #4f7d63;
   --tint-check-bg: #f5efe2;
   --tint-check-mark: #a98551;
-  --tint-note-bg: #f3eee2;
-  --tint-note-border: #e3d8c0;
 
   /* ---- Type ---- */
   --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
@@ -73,7 +71,7 @@ img, svg { max-width: 100%; height: auto; }
 img { display: block; }
 
 /* Defensive: cards/blocks never exceed their column */
-.card, .note, .contact-info, .notes-list, .carousel, .glance-card {
+.card, .contact-info, .notes-list, .carousel, .glance-card {
   max-width: 100%;
 }
 
@@ -281,11 +279,6 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
   border: 1px solid var(--color-border);
   padding: .42rem .9rem; border-radius: 999px; font-weight: 600; font-size: .92rem;
 }
-.note {
-  background: var(--tint-note-bg); border: 1px solid var(--tint-note-border);
-  color: #6f6450; padding: .85rem 1.05rem; border-radius: var(--radius-sm);
-  max-width: 62ch; font-size: .96rem;
-}
 
 /* Cards (accepted / check / volunteer) — balanced, gentle tints */
 .needs-grid { display: grid; gap: 1rem; margin-top: 1.6rem; }
@@ -390,17 +383,13 @@ a { color: var(--color-primary); text-underline-offset: .15em; }
   content: "✿"; position: absolute; left: 0; top: .05rem;
   color: var(--color-sage); font-size: .95rem;
 }
-.emergency {
-  color: var(--color-muted); font-size: .9rem; max-width: 64ch; margin: 0;
-  padding-left: 1.1rem; border-left: 3px solid var(--color-border);
-}
 
 /* ============================== FOOTER ================================ */
 /* Minimal footer — a single discreet identity line, not a heavy block */
 .site-footer {
   background: var(--color-surface-alt);
   border-top: 1px solid var(--color-border);
-  padding: 1.3rem 0; margin-top: var(--space);
+  padding: 1.3rem 0;
   color: var(--color-muted);
 }
 .footer-line { margin: 0; font-size: .9rem; text-align: center; }

@@ -114,8 +114,6 @@ const SITE = {
         "Hygiene products (soap, toothpaste)",
         "School supplies (notebooks, pens)"
       ],
-      needsNote:
-        "Needs change often. Please confirm the list before buying.",
 
       // Donations detail (kept compact)
       acceptedTitle: "We can usually accept",
@@ -141,9 +139,7 @@ const SITE = {
       importantNotes: [
         "Please do not share children's photos without written permission.",
         "Only bring medicines if the organization specifically asks."
-      ],
-      emergencyNote:
-        "This page is for information only. In an emergency, contact Vietnam's local emergency services."
+      ]
     },
 
     vi: {
@@ -175,8 +171,6 @@ const SITE = {
         "Đồ vệ sinh (xà phòng, kem đánh răng)",
         "Đồ dùng học tập (vở, bút)"
       ],
-      needsNote:
-        "Nhu cầu thay đổi thường xuyên. Vui lòng xác nhận danh sách trước khi mua.",
 
       acceptedTitle: "Chúng tôi thường có thể nhận",
       acceptedDonations: [
@@ -198,9 +192,7 @@ const SITE = {
       importantNotes: [
         "Vui lòng không chia sẻ ảnh trẻ em khi chưa có sự cho phép bằng văn bản.",
         "Chỉ mang thuốc nếu tổ chức yêu cầu cụ thể."
-      ],
-      emergencyNote:
-        "Trang này chỉ mang tính thông tin. Trong trường hợp khẩn cấp, hãy liên hệ dịch vụ cứu hộ tại Việt Nam."
+      ]
     }
   }
 };
