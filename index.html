@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- These tags are filled with sensible defaults and updated by script.js -->
+  <title>Example Community Center Da Nang</title>
+  <meta name="description" id="meta-description"
+        content="A small community center in Da Nang supporting local families and children. Contact before visiting or donating." />
+  <meta name="theme-color" content="#2f6f5e" id="meta-theme-color" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" id="og-title" content="Example Community Center Da Nang" />
+  <meta property="og:description" id="og-description"
+        content="A small community center in Da Nang supporting local families and children." />
+  <meta property="og:image" id="og-image" content="images/og-image.svg" />
+  <meta property="og:url" id="og-url" content="https://example.org/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon (placeholder SVG, replace in /images/) -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" id="favicon" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured data for search engines / Google Business. Injected by script.js -->
+  <script type="application/ld+json" id="json-ld"></script>
+</head>
+
+<body>
+  <!-- Skip link for keyboard / screen-reader users -->
+  <a href="#about" class="skip-link" data-ui="skipLink">Skip to content</a>
+
+  <!-- ============================= NAVBAR ============================= -->
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" id="brand-name">Example Community Center</a>
+
+      <!-- Hamburger button (mobile only) — icon-only to save space -->
+      <button type="button" class="nav__toggle" id="nav-toggle"
+              aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+        <span class="nav__bars" aria-hidden="true"></span>
+      </button>
+
+      <!-- On mobile this collapses into the hamburger dropdown
+           (links + language switch). On desktop it shows inline. -->
+      <nav class="nav__menu" id="nav-menu" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li><a href="#about" class="nav__link" data-nav="about" data-ui="navAbout">About</a></li>
+          <li><a href="#how-to-help" class="nav__link" data-nav="how-to-help" data-ui="navHelp">How to help</a></li>
+          <li><a href="#needs" class="nav__link" data-nav="needs" data-ui="navNeeds">Needs</a></li>
+          <li><a href="#contact" class="nav__link" data-nav="contact" data-ui="navContact">Visit &amp; Contact</a></li>
+          <li><a href="#photos" class="nav__link" data-nav="photos" data-ui="navPhotos">Photos</a></li>
+          <li><a href="#notes" class="nav__link" data-nav="notes" data-ui="navNotes">Notes</a></li>
+        </ul>
+
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" data-lang="vi" aria-pressed="false">VI</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" aria-labelledby="hero-name">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-subtitle" id="hero-subtitle"></p>
+          <h1 id="hero-name"></h1>
+          <p class="hero-desc" id="hero-short"></p>
+          <div class="hero-actions" id="hero-actions"></div>
+        </div>
+        <figure class="hero-media">
+          <img id="hero-image" src="images/hero.svg" alt="" width="800" height="600" loading="eager" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================ AT A GLANCE ======================== -->
+    <section class="glance" aria-label="At a glance">
+      <div class="container">
+        <ul class="glance-grid" id="glance-grid"></ul>
+      </div>
+    </section>
+
+    <!-- ============================= ABOUT ============================= -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title" data-ui="aboutTitle">About</h2>
+        <p class="lead" id="about-long"></p>
+        <h3 data-ui="whoWeHelpTitle">Who we help</h3>
+        <p id="about-who"></p>
+      </div>
+    </section>
+
+    <!-- =========================== HOW TO HELP ========================= -->
+    <section id="how-to-help" class="section section--alt" aria-labelledby="help-title">
+      <div class="container">
+        <h2 id="help-title" data-ui="helpTitle">How to help</h2>
+        <p class="lead" id="help-intro"></p>
+        <ol class="steps" id="help-steps" aria-label="Steps to help"></ol>
+      </div>
+    </section>
+
+    <!-- =========================== CURRENT NEEDS ======================= -->
+    <section id="needs" class="section" aria-labelledby="needs-title">
+      <div class="container">
+        <h2 id="needs-title"></h2>
+        <ul class="badges" id="needs-list" aria-label="Current needs"></ul>
+        <p class="note" id="needs-note" role="note"></p>
+
+        <div class="needs-grid">
+          <div class="card card--accept">
+            <h3 id="accepted-title"></h3>
+            <ul class="check-list" id="accepted-list"></ul>
+          </div>
+          <div class="card card--volunteer">
+            <h3 id="volunteer-title"></h3>
+            <p id="volunteer-info"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= VISIT & CONTACT ======================= -->
+    <section id="contact" class="section section--alt" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title" data-ui="contactTitle">Visit &amp; contact</h2>
+        <div class="contact-grid">
+          <dl class="contact-info" id="contact-info"></dl>
+          <div class="contact-actions">
+            <div class="contact-buttons" id="contact-buttons"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== PHOTOS =========================== -->
+    <section id="photos" class="section" aria-labelledby="photos-title">
+      <div class="container">
+        <h2 id="photos-title" data-ui="photosTitle">Photos</h2>
+
+        <div class="carousel" id="carousel" role="group" aria-roledescription="carousel" aria-label="Photos">
+          <div class="carousel__viewport" id="carousel-viewport">
+            <div class="carousel__track" id="carousel-track"><!-- slides injected by script.js --></div>
+            <!-- Arrows overlay the photo, so they never widen the layout -->
+            <button type="button" class="carousel__btn carousel__btn--prev" id="carousel-prev">
+              <span aria-hidden="true">‹</span>
+            </button>
+            <button type="button" class="carousel__btn carousel__btn--next" id="carousel-next">
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
+
+          <p class="carousel__caption" id="carousel-caption" aria-live="polite"></p>
+          <div class="carousel__dots" id="carousel-dots" role="tablist" aria-label="Choose photo"></div>
+          <ul class="carousel__thumbs" id="carousel-thumbs"></ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================= IMPORTANT NOTES ======================= -->
+    <section id="notes" class="section section--notes" aria-labelledby="notes-title">
+      <div class="container">
+        <h2 id="notes-title"></h2>
+        <ul class="notes-list" id="notes-list"></ul>
+        <p class="emergency" id="emergency-note" role="note"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER =========================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="status" id="footer-status"></p>
+      <p class="disclaimer" data-ui="footerDisclaimer"></p>
+      <ul class="footer-contact" id="footer-contact" aria-label="Contact"></ul>
+    </div>
+  </footer>
+
+  <!-- Floating "back to top" button (revealed after scrolling) -->
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+    <span aria-hidden="true">↑</span>
+  </button>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

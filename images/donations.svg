@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Placeholder: donated supplies">
+  <rect width="800" height="600" fill="#f4efe6"/>
+  <rect x="120" y="300" width="170" height="170" fill="#d8a85c"/>
+  <rect x="320" y="260" width="170" height="210" fill="#cf9a4a"/>
+  <rect x="520" y="320" width="160" height="150" fill="#e2b873"/>
+  <rect x="120" y="290" width="170" height="22" fill="#b9852f"/>
+  <rect x="320" y="250" width="170" height="22" fill="#b9852f"/>
+  <rect x="520" y="310" width="160" height="22" fill="#b9852f"/>
+  <text x="400" y="540" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#6b6b66">Replace with a photo of donated goods</text>
+</svg>
